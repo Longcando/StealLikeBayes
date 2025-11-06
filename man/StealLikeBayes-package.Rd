@@ -6,6 +6,8 @@
 \alias{StealLikeBayes}
 \title{StealLikeBayes: What the Package Does (Short Line)}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 More about what it does (maybe more than one line).
 }
 \keyword{internal}
