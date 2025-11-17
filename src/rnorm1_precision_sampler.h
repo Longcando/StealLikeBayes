@@ -1,5 +1,5 @@
-#ifndef _SIMULATION_SMOOTHER_AR1_
-#define _SIMULATION_SMOOTHER_AR1_
+#ifndef _RNORM1_PRECISION_SAMPLER_
+#define _RNORM1_PRECISION_SAMPLER_
 
 #include <RcppArmadillo.h>
 
@@ -23,10 +23,10 @@ arma::vec backward_algorithm(
 );
 
 
-arma::vec precision_sampler_ar1(
+arma::vec rnorm1_precision_sampler(
+    const arma::vec&     location,
     const arma::vec&     precision_diag,
-    const double&        precision_offdiag,
-    const arma::vec&     location
+    const double&        precision_offdiag
 );
 
 #endif

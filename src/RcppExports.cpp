@@ -121,23 +121,23 @@ RcppExport SEXP _StealLikeBayes_backward_algorithm(SEXP chol_diagSEXP, SEXP chol
     UNPROTECT(1);
     return rcpp_result_gen;
 }
-// precision_sampler_ar1
-arma::vec precision_sampler_ar1(const arma::vec& precision_diag, const double& precision_offdiag, const arma::vec& location);
-static SEXP _StealLikeBayes_precision_sampler_ar1_try(SEXP precision_diagSEXP, SEXP precision_offdiagSEXP, SEXP locationSEXP) {
+// rnorm1_precision_sampler
+arma::vec rnorm1_precision_sampler(const arma::vec& location, const arma::vec& precision_diag, const double& precision_offdiag);
+static SEXP _StealLikeBayes_rnorm1_precision_sampler_try(SEXP locationSEXP, SEXP precision_diagSEXP, SEXP precision_offdiagSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const arma::vec& >::type location(locationSEXP);
     Rcpp::traits::input_parameter< const arma::vec& >::type precision_diag(precision_diagSEXP);
     Rcpp::traits::input_parameter< const double& >::type precision_offdiag(precision_offdiagSEXP);
-    Rcpp::traits::input_parameter< const arma::vec& >::type location(locationSEXP);
-    rcpp_result_gen = Rcpp::wrap(precision_sampler_ar1(precision_diag, precision_offdiag, location));
+    rcpp_result_gen = Rcpp::wrap(rnorm1_precision_sampler(location, precision_diag, precision_offdiag));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _StealLikeBayes_precision_sampler_ar1(SEXP precision_diagSEXP, SEXP precision_offdiagSEXP, SEXP locationSEXP) {
+RcppExport SEXP _StealLikeBayes_rnorm1_precision_sampler(SEXP locationSEXP, SEXP precision_diagSEXP, SEXP precision_offdiagSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_StealLikeBayes_precision_sampler_ar1_try(precision_diagSEXP, precision_offdiagSEXP, locationSEXP));
+        rcpp_result_gen = PROTECT(_StealLikeBayes_rnorm1_precision_sampler_try(locationSEXP, precision_diagSEXP, precision_offdiagSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -165,7 +165,7 @@ static int _StealLikeBayes_RcppExport_validate(const char* sig) {
         signatures.insert("Rcpp::List(*cholesky_tridiagonal)(const arma::vec&,const double&)");
         signatures.insert("arma::vec(*forward_algorithm)(const arma::vec&,const arma::vec&,const arma::vec&)");
         signatures.insert("arma::vec(*backward_algorithm)(const arma::vec&,const arma::vec&,const arma::vec&)");
-        signatures.insert("arma::vec(*precision_sampler_ar1)(const arma::vec&,const double&,const arma::vec&)");
+        signatures.insert("arma::vec(*rnorm1_precision_sampler)(const arma::vec&,const arma::vec&,const double&)");
     }
     return signatures.find(sig) != signatures.end();
 }
@@ -175,7 +175,7 @@ RcppExport SEXP _StealLikeBayes_RcppExport_registerCCallable() {
     R_RegisterCCallable("StealLikeBayes", "_StealLikeBayes_cholesky_tridiagonal", (DL_FUNC)_StealLikeBayes_cholesky_tridiagonal_try);
     R_RegisterCCallable("StealLikeBayes", "_StealLikeBayes_forward_algorithm", (DL_FUNC)_StealLikeBayes_forward_algorithm_try);
     R_RegisterCCallable("StealLikeBayes", "_StealLikeBayes_backward_algorithm", (DL_FUNC)_StealLikeBayes_backward_algorithm_try);
-    R_RegisterCCallable("StealLikeBayes", "_StealLikeBayes_precision_sampler_ar1", (DL_FUNC)_StealLikeBayes_precision_sampler_ar1_try);
+    R_RegisterCCallable("StealLikeBayes", "_StealLikeBayes_rnorm1_precision_sampler", (DL_FUNC)_StealLikeBayes_rnorm1_precision_sampler_try);
     R_RegisterCCallable("StealLikeBayes", "_StealLikeBayes_RcppExport_validate", (DL_FUNC)_StealLikeBayes_RcppExport_validate);
     return R_NilValue;
 }
@@ -184,7 +184,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_StealLikeBayes_cholesky_tridiagonal", (DL_FUNC) &_StealLikeBayes_cholesky_tridiagonal, 2},
     {"_StealLikeBayes_forward_algorithm", (DL_FUNC) &_StealLikeBayes_forward_algorithm, 3},
     {"_StealLikeBayes_backward_algorithm", (DL_FUNC) &_StealLikeBayes_backward_algorithm, 3},
-    {"_StealLikeBayes_precision_sampler_ar1", (DL_FUNC) &_StealLikeBayes_precision_sampler_ar1, 3},
+    {"_StealLikeBayes_rnorm1_precision_sampler", (DL_FUNC) &_StealLikeBayes_rnorm1_precision_sampler, 3},
     {"_StealLikeBayes_RcppExport_registerCCallable", (DL_FUNC) &_StealLikeBayes_RcppExport_registerCCallable, 0},
     {NULL, NULL, 0}
 };
