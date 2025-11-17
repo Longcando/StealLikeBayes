@@ -31,3 +31,4 @@ LinkingTo:
 Encoding: UTF-8
 RoxygenNote: 7.3.3
 Suggests: tinytest
+URL: http://bsvars.org/StealLikeBayes/

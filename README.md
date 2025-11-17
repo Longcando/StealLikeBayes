@@ -26,7 +26,7 @@ You are welcome to contribute to **StealLikeBayes**! How does this work?
   under **GPL 3** you’re good. Otherwise, you must argue the licence
   compatibility.
 - Fully acknowledge the source of the contributed code in the file with
-  your c ode and documentation.
+  your code and documentation.
 - Provide one Bayesian statistical routine per submission.
 - Your submission must consist of:
   - one **C++** file, `src/*.cpp`
@@ -41,10 +41,10 @@ You are welcome to contribute to **StealLikeBayes**! How does this work?
 
 ### To-do list
 
-- [ ] Fork the repository
-  [bsvars/StealLikeBayes](https://github.com/bsvars/StealLikeBayes).
 - [ ] Open an issue by clicking *New issue* \>\> *A new submission
   template*.
+- [ ] Fork the repository
+  [bsvars/StealLikeBayes](https://github.com/bsvars/StealLikeBayes).
 - [ ] Follow the instructions from the issue.
 - [ ] Push your commits linking them all to your issue by including the
   hash tag of your issue.
@@ -61,6 +61,8 @@ You are welcome to contribute to **StealLikeBayes**! How does this work?
 
 ### Instructions from the issue template
 
+- [ ] Fork the repository
+  [bsvars/StealLikeBayes](https://github.com/bsvars/StealLikeBayes).
 - [ ] Include your **C++** file, `src/[main_routine].cpp`, named after
   the main routine/function you’re contributing called `[main_routine]`.
   - [ ] Acknowledge the authorship of the source code in this file in
@@ -77,14 +79,14 @@ You are welcome to contribute to **StealLikeBayes**! How does this work?
     `stopifnot()`.
   - [ ] Include full documentation using **roxygen2** that must have all
     necessary elements including:
-    - [ ] the description of arguments and values, also described in
-      terms of the **C++** objects,
-    - [ ] the acknowledgement of the original code authorship in
-      `@details` with explicit references to the **R** package where the
-      original code comes from listed in `@references`, and to the
-      package defining the class of **C++** inputs and outputs,
-    - [ ] your authorship acknowledgement in section `@authors`,
-    - [ ] an example of the **R** function use in `@examples`.
+  - [ ] the description of arguments and values, also described in terms
+    of the **C++** objects,
+  - [ ] the acknowledgement of the original code authorship in
+    `@details` with explicit references to the **R** package where the
+    original code comes from listed in `@references`, and to the package
+    defining the class of **C++** inputs and outputs,
+  - [ ] your authorship acknowledgement in section `@authors`,
+  - [ ] an example of the **R** function use in `@examples`.
 - [ ] Include an **R** file with tests of your contributed **R**
   function, `inst/tinytest/[main_routine].R`,
 - [ ] Update on dependencies in `DESCRIPTION` and
@@ -94,7 +96,18 @@ You are welcome to contribute to **StealLikeBayes**! How does this work?
   `contributions = "contributions: [main_routine]"`.
 - [ ] Update the `NEWS.md` by providing the `[main_routine]`, your
   GitHub profile login, and a link to this issue.
-- [ ] Before
+- [ ] Push your commits linking them all to your issue by including the
+  hash tag of your issue.
+- [ ] Run checks of the package locally. They all need to pass!
+
+<!-- -->
+
+    Rcpp::compileAttributes()
+    devtools::document()
+    devtools::check()
+
+- [ ] Submit your Pull Request.
+- [ ] Respond to all the comments from the maintainer.
 
 ## How to use the package **StealLikeBayes**
 
@@ -115,7 +128,10 @@ To use **C++** code from **StealLikeBayes** follow the steps:
 - [ ] Include our header in your `src/*.cpp` files, e.g.:
   `#include "StealLikeBayes.h"`.
 - [ ] Use our functions in your **C++** code, e.g.:
-  `arma::vec out = StealLikeBayes::rnorm1_precision_sampler(zeros<vec>(10), ones<vec>(10), -0.5);`.
+
+<!-- -->
+
+    arma::vec out = StealLikeBayes::rnorm1_precision_sampler(zeros<vec>(10), ones<vec>(10), -0.5);
 
 ### Use our **R** code in your **R** package
 
@@ -126,7 +142,10 @@ That’s simple!
 - [ ] Include dependencies in your `R/*-package.R` file,
   e.g. `@importFrom StealLikeBayes rnorm1_precision_sampler`.
 - [ ] Use our functions in your **R** code, e.g.:
-  `out = StealLikeBayes::rnorm1_precision_sampler(rep(0, 10), rep(1, 10), -0.5)`.
+
+<!-- -->
+
+    out = StealLikeBayes::rnorm1_precision_sampler(rep(0, 10), rep(1, 10), -0.5)
 
 ## Installation
 
