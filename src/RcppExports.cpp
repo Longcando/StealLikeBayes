@@ -14,6 +14,28 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// qr_sign_cpp
+arma::mat qr_sign_cpp(const arma::mat& A);
+RcppExport SEXP _StealLikeBayes_qr_sign_cpp(SEXP ASEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type A(ASEXP);
+    rcpp_result_gen = Rcpp::wrap(qr_sign_cpp(A));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rhaar_cpp
+arma::mat rhaar_cpp(const int& n);
+RcppExport SEXP _StealLikeBayes_rhaar_cpp(SEXP nSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const int& >::type n(nSEXP);
+    rcpp_result_gen = Rcpp::wrap(rhaar_cpp(n));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cholesky_tridiagonal
 Rcpp::List cholesky_tridiagonal(const arma::vec& omega_diag, const double& omega_offdiag);
 static SEXP _StealLikeBayes_cholesky_tridiagonal_try(SEXP omega_diagSEXP, SEXP omega_offdiagSEXP) {
@@ -181,6 +203,8 @@ RcppExport SEXP _StealLikeBayes_RcppExport_registerCCallable() {
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_StealLikeBayes_qr_sign_cpp", (DL_FUNC) &_StealLikeBayes_qr_sign_cpp, 1},
+    {"_StealLikeBayes_rhaar_cpp", (DL_FUNC) &_StealLikeBayes_rhaar_cpp, 1},
     {"_StealLikeBayes_cholesky_tridiagonal", (DL_FUNC) &_StealLikeBayes_cholesky_tridiagonal, 2},
     {"_StealLikeBayes_forward_algorithm", (DL_FUNC) &_StealLikeBayes_forward_algorithm, 3},
     {"_StealLikeBayes_backward_algorithm", (DL_FUNC) &_StealLikeBayes_backward_algorithm, 3},
