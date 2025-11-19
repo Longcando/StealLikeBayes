@@ -556,6 +556,25 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// sample_variances_normal_gamma
+arma::vec sample_variances_normal_gamma(const arma::vec x, arma::vec& theta_tilde, double& zeta, double& a, const arma::vec a_vec, const double varrho0, const double varrho1, const bool hyper, const double tol);
+RcppExport SEXP _StealLikeBayes_sample_variances_normal_gamma(SEXP xSEXP, SEXP theta_tildeSEXP, SEXP zetaSEXP, SEXP aSEXP, SEXP a_vecSEXP, SEXP varrho0SEXP, SEXP varrho1SEXP, SEXP hyperSEXP, SEXP tolSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::vec >::type x(xSEXP);
+    Rcpp::traits::input_parameter< arma::vec& >::type theta_tilde(theta_tildeSEXP);
+    Rcpp::traits::input_parameter< double& >::type zeta(zetaSEXP);
+    Rcpp::traits::input_parameter< double& >::type a(aSEXP);
+    Rcpp::traits::input_parameter< const arma::vec >::type a_vec(a_vecSEXP);
+    Rcpp::traits::input_parameter< const double >::type varrho0(varrho0SEXP);
+    Rcpp::traits::input_parameter< const double >::type varrho1(varrho1SEXP);
+    Rcpp::traits::input_parameter< const bool >::type hyper(hyperSEXP);
+    Rcpp::traits::input_parameter< const double >::type tol(tolSEXP);
+    rcpp_result_gen = Rcpp::wrap(sample_variances_normal_gamma(x, theta_tilde, zeta, a, a_vec, varrho0, varrho1, hyper, tol));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 // validate (ensure exported C++ functions exist before calling them)
 static int _StealLikeBayes_RcppExport_validate(const char* sig) { 
@@ -617,6 +636,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_StealLikeBayes_rtnormcpp", (DL_FUNC) &_StealLikeBayes_rtnormcpp, 4},
     {"_StealLikeBayes_rtmvnorm", (DL_FUNC) &_StealLikeBayes_rtmvnorm, 7},
     {"_StealLikeBayes_sample_variances_horseshoe", (DL_FUNC) &_StealLikeBayes_sample_variances_horseshoe, 5},
+    {"_StealLikeBayes_sample_variances_normal_gamma", (DL_FUNC) &_StealLikeBayes_sample_variances_normal_gamma, 9},
     {"_StealLikeBayes_RcppExport_registerCCallable", (DL_FUNC) &_StealLikeBayes_RcppExport_registerCCallable, 0},
     {NULL, NULL, 0}
 };
