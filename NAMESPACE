@@ -3,5 +3,6 @@
 export(rgennorm)
 export(rhaar1)
 export(rnorm1_precision_sampler)
+export(sample_variances_horseshoe)
 importFrom(Rcpp,sourceCpp)
 useDynLib(StealLikeBayes, .registration = TRUE)

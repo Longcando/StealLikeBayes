@@ -324,6 +324,21 @@ RcppExport SEXP _StealLikeBayes_rnorm1_precision_sampler(SEXP locationSEXP, SEXP
     UNPROTECT(1);
     return rcpp_result_gen;
 }
+// sample_variances_horseshoe
+arma::vec sample_variances_horseshoe(const arma::vec x, arma::vec& theta, double& zeta, arma::vec& nu, double& varpi);
+RcppExport SEXP _StealLikeBayes_sample_variances_horseshoe(SEXP xSEXP, SEXP thetaSEXP, SEXP zetaSEXP, SEXP nuSEXP, SEXP varpiSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::vec >::type x(xSEXP);
+    Rcpp::traits::input_parameter< arma::vec& >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< double& >::type zeta(zetaSEXP);
+    Rcpp::traits::input_parameter< arma::vec& >::type nu(nuSEXP);
+    Rcpp::traits::input_parameter< double& >::type varpi(varpiSEXP);
+    rcpp_result_gen = Rcpp::wrap(sample_variances_horseshoe(x, theta, zeta, nu, varpi));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 // validate (ensure exported C++ functions exist before calling them)
 static int _StealLikeBayes_RcppExport_validate(const char* sig) { 
@@ -366,6 +381,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_StealLikeBayes_forward_algorithm", (DL_FUNC) &_StealLikeBayes_forward_algorithm, 3},
     {"_StealLikeBayes_backward_algorithm", (DL_FUNC) &_StealLikeBayes_backward_algorithm, 3},
     {"_StealLikeBayes_rnorm1_precision_sampler", (DL_FUNC) &_StealLikeBayes_rnorm1_precision_sampler, 3},
+    {"_StealLikeBayes_sample_variances_horseshoe", (DL_FUNC) &_StealLikeBayes_sample_variances_horseshoe, 5},
     {"_StealLikeBayes_RcppExport_registerCCallable", (DL_FUNC) &_StealLikeBayes_RcppExport_registerCCallable, 0},
     {NULL, NULL, 0}
 };

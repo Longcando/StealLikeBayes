@@ -9,6 +9,10 @@ rhaar1 <- function(n) {
     .Call(`_StealLikeBayes_rhaar1`, n)
 }
 
+sample_variances_horseshoe <- function(x, theta, zeta, nu, varpi) {
+    .Call(`_StealLikeBayes_sample_variances_horseshoe`, x, theta, zeta, nu, varpi)
+}
+
 # Register entry points for exported C++ functions
 methods::setLoadAction(function(ns) {
     .Call(`_StealLikeBayes_RcppExport_registerCCallable`)

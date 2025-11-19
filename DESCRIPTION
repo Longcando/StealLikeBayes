@@ -24,6 +24,16 @@ Authors@R: c(
         ORCID = "0009-0005-6192-9061", 
         contributions = "contributions: rhaar1"
       )
+    ),
+    person(
+      "Longcan",
+      "Li",,
+      "longcando@outlook.com", 
+      role = c("aut"),
+      comment = c(
+        ORCID = "0009-0007-2190-768X", 
+        contributions = "contributions: sample_variances_horseshoe"
+      )
     )
   )
 Description: 
