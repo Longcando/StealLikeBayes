@@ -1,11 +1,10 @@
 #' @title Samples variances of the Normal-Gamma prior distribution by Brown & Griffin (2010).
 #'
-#' @description This function samples variances of the Normal-Gamma prior distribution.
-#' The prior distribution of an element of a \eqn{k}-vector \eqn{X}, \eqn{x_i}, is 
-#' in a hierarchical form as
+#' @description This function samples variances from a Normal-Gamma prior distribution.
+#' The prior distribution has a hierarchical structure where each element \eqn{x_i} of a \eqn{k}-vector \eqn{X} follows: 
 #' \deqn{x_i \sim N(0,\vartheta_i \zeta_j), \vartheta_i \sim G(a_j, a_j / 2)
-#' \text{, and } \zeta_j^{-1} \sim G(b,c)} for \eqn{i=j=1,\dots,k}. \eqn{a_j} is the i.i.d.
-#' discrete hyperprior \eqn{Pr(a_j = \tilde{a}_r) = p_r} and
+#' \text{, and } \zeta_j^{-1} \sim G(b,c)} for \eqn{i=j=1,\dots,k}. The hyperparameter \eqn{a_j}
+#' follows an i.i.d. discrete hyperprior with \eqn{Pr(a_j = \tilde{a}_r) = p_r}, where
 #' \eqn{\tilde{a} = (\tilde{a}_1, \dots, \tilde{a}_R)'} is the vector of strictly
 #' positive support points. See Brown & Griffin (2010) and Gruber & Kastner (2025) for further details.
 #'
