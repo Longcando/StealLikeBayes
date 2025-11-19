@@ -55,7 +55,7 @@
 #' Engineering, 303-307, <doi:10.1109/ICCAE64891.2025.10980539>
 #' 
 #' @examples 
-#' result <- sample_variances_horseshoe( rep(0, 2), rep(0, 2), 1, rep(1, 2), 1)
+#' sample_variances_horseshoe( rep(0, 2), rep(0, 2), 1, rep(1, 2), 1)
 #' 
 #' @export
 sample_variances_horseshoe <- function(coefs, theta, zeta, nu, varpi) {
