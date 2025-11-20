@@ -2,7 +2,7 @@ Package: StealLikeBayes
 Type: Package
 Title: A C++ Compendium of Bayesian Statistical Routines for R Packages
 Version: 1.0
-Date: 2025-11-19
+Date: 2025-11-21
 Maintainer: Tomasz Woźniak <wozniak.tom@pm.me>
 Authors@R: c(
     person(
@@ -62,14 +62,13 @@ Description:
   packages can use it in their C++ code. We actually don't steal anything, or 
   claim that Thomas Bayes did, but copy code that is compatible with our GPL 3 
   licence, fully acknowledging the authorship of the original code.
-Depends: 
-  shrinkTVP
 Imports: 
-  Rcpp (>= 1.1.0)
+  Rcpp (>= 1.1.0),
+  GIGrvg
 LinkingTo: 
   Rcpp, 
   RcppArmadillo,
-  shrinkTVP
+  GIGrvg
 Suggests: 
   tinytest
 URL: https://bsvars.org/StealLikeBayes/
