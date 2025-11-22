@@ -3,6 +3,7 @@
 
 #include "../inst/include/StealLikeBayes.h"
 #include <RcppArmadillo.h>
+#include <RcppEigen.h>
 #include <Rcpp.h>
 #include <string>
 #include <set>
@@ -587,6 +588,370 @@ RcppExport SEXP _StealLikeBayes_rtmvnorm(SEXP meanSEXP, SEXP sigmaSEXP, SEXP blc
     UNPROTECT(1);
     return rcpp_result_gen;
 }
+// validate_dimensions
+void validate_dimensions(const Eigen::MatrixXd& cov, const Eigen::VectorXd& mean, const Eigen::VectorXd& initial, const Eigen::MatrixXd& F, const Eigen::VectorXd& g);
+static SEXP _StealLikeBayes_validate_dimensions_try(SEXP covSEXP, SEXP meanSEXP, SEXP initialSEXP, SEXP FSEXP, SEXP gSEXP) {
+BEGIN_RCPP
+    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type cov(covSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type mean(meanSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type initial(initialSEXP);
+    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type F(FSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type g(gSEXP);
+    validate_dimensions(cov, mean, initial, F, g);
+    return R_NilValue;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _StealLikeBayes_validate_dimensions(SEXP covSEXP, SEXP meanSEXP, SEXP initialSEXP, SEXP FSEXP, SEXP gSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_StealLikeBayes_validate_dimensions_try(covSEXP, meanSEXP, initialSEXP, FSEXP, gSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// symmetrise
+Eigen::MatrixXd symmetrise(const Eigen::MatrixXd& cov);
+static SEXP _StealLikeBayes_symmetrise_try(SEXP covSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type cov(covSEXP);
+    rcpp_result_gen = Rcpp::wrap(symmetrise(cov));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _StealLikeBayes_symmetrise(SEXP covSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_StealLikeBayes_symmetrise_try(covSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// transform_constraint_matrix
+Eigen::MatrixXd transform_constraint_matrix(const Eigen::MatrixXd& F, const Eigen::MatrixXd& L);
+static SEXP _StealLikeBayes_transform_constraint_matrix_try(SEXP FSEXP, SEXP LSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type F(FSEXP);
+    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type L(LSEXP);
+    rcpp_result_gen = Rcpp::wrap(transform_constraint_matrix(F, L));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _StealLikeBayes_transform_constraint_matrix(SEXP FSEXP, SEXP LSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_StealLikeBayes_transform_constraint_matrix_try(FSEXP, LSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// transform_constraint_offset
+Eigen::VectorXd transform_constraint_offset(const Eigen::MatrixXd& F, const Eigen::VectorXd& mean, const Eigen::VectorXd& g);
+static SEXP _StealLikeBayes_transform_constraint_offset_try(SEXP FSEXP, SEXP meanSEXP, SEXP gSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type F(FSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type mean(meanSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type g(gSEXP);
+    rcpp_result_gen = Rcpp::wrap(transform_constraint_offset(F, mean, g));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _StealLikeBayes_transform_constraint_offset(SEXP FSEXP, SEXP meanSEXP, SEXP gSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_StealLikeBayes_transform_constraint_offset_try(FSEXP, meanSEXP, gSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// transform_initial_point
+Eigen::VectorXd transform_initial_point(const Eigen::MatrixXd& L, const Eigen::VectorXd& mean, const Eigen::VectorXd& initial);
+static SEXP _StealLikeBayes_transform_initial_point_try(SEXP LSEXP, SEXP meanSEXP, SEXP initialSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type L(LSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type mean(meanSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type initial(initialSEXP);
+    rcpp_result_gen = Rcpp::wrap(transform_initial_point(L, mean, initial));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _StealLikeBayes_transform_initial_point(SEXP LSEXP, SEXP meanSEXP, SEXP initialSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_StealLikeBayes_transform_initial_point_try(LSEXP, meanSEXP, initialSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// get_next_linear_hit_time
+Rcpp::List get_next_linear_hit_time(const Eigen::VectorXd& a, const Eigen::VectorXd& b, const Eigen::MatrixXd& F, const Eigen::VectorXd& g, int current_constraint);
+static SEXP _StealLikeBayes_get_next_linear_hit_time_try(SEXP aSEXP, SEXP bSEXP, SEXP FSEXP, SEXP gSEXP, SEXP current_constraintSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type a(aSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type b(bSEXP);
+    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type F(FSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type g(gSEXP);
+    Rcpp::traits::input_parameter< int >::type current_constraint(current_constraintSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_next_linear_hit_time(a, b, F, g, current_constraint));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _StealLikeBayes_get_next_linear_hit_time(SEXP aSEXP, SEXP bSEXP, SEXP FSEXP, SEXP gSEXP, SEXP current_constraintSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_StealLikeBayes_get_next_linear_hit_time_try(aSEXP, bSEXP, FSEXP, gSEXP, current_constraintSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// verify_constraints
+bool verify_constraints(const Eigen::VectorXd& x, const Eigen::MatrixXd& F, const Eigen::VectorXd& g);
+static SEXP _StealLikeBayes_verify_constraints_try(SEXP xSEXP, SEXP FSEXP, SEXP gSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type F(FSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type g(gSEXP);
+    rcpp_result_gen = Rcpp::wrap(verify_constraints(x, F, g));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _StealLikeBayes_verify_constraints(SEXP xSEXP, SEXP FSEXP, SEXP gSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_StealLikeBayes_verify_constraints_try(xSEXP, FSEXP, gSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// reflect_velocity
+Eigen::VectorXd reflect_velocity(const Eigen::VectorXd& f, const Eigen::VectorXd& hit_velocity);
+static SEXP _StealLikeBayes_reflect_velocity_try(SEXP fSEXP, SEXP hit_velocitySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type f(fSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type hit_velocity(hit_velocitySEXP);
+    rcpp_result_gen = Rcpp::wrap(reflect_velocity(f, hit_velocity));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _StealLikeBayes_reflect_velocity(SEXP fSEXP, SEXP hit_velocitySEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_StealLikeBayes_reflect_velocity_try(fSEXP, hit_velocitySEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// sample_next
+Eigen::VectorXd sample_next(const Eigen::VectorXd& current_sample, int dim, const Eigen::MatrixXd& F, const Eigen::VectorXd& g);
+static SEXP _StealLikeBayes_sample_next_try(SEXP current_sampleSEXP, SEXP dimSEXP, SEXP FSEXP, SEXP gSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type current_sample(current_sampleSEXP);
+    Rcpp::traits::input_parameter< int >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type F(FSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type g(gSEXP);
+    rcpp_result_gen = Rcpp::wrap(sample_next(current_sample, dim, F, g));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _StealLikeBayes_sample_next(SEXP current_sampleSEXP, SEXP dimSEXP, SEXP FSEXP, SEXP gSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_StealLikeBayes_sample_next_try(current_sampleSEXP, dimSEXP, FSEXP, gSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// rtmvnorm_hmc
+Eigen::MatrixXd rtmvnorm_hmc(int n, const Eigen::VectorXd& mean, const Eigen::MatrixXd& cov, const Eigen::VectorXd& initial, const Eigen::MatrixXd& F, const Eigen::VectorXd& g, int burn);
+static SEXP _StealLikeBayes_rtmvnorm_hmc_try(SEXP nSEXP, SEXP meanSEXP, SEXP covSEXP, SEXP initialSEXP, SEXP FSEXP, SEXP gSEXP, SEXP burnSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type mean(meanSEXP);
+    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type cov(covSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type initial(initialSEXP);
+    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type F(FSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type g(gSEXP);
+    Rcpp::traits::input_parameter< int >::type burn(burnSEXP);
+    rcpp_result_gen = Rcpp::wrap(rtmvnorm_hmc(n, mean, cov, initial, F, g, burn));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _StealLikeBayes_rtmvnorm_hmc(SEXP nSEXP, SEXP meanSEXP, SEXP covSEXP, SEXP initialSEXP, SEXP FSEXP, SEXP gSEXP, SEXP burnSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_StealLikeBayes_rtmvnorm_hmc_try(nSEXP, meanSEXP, covSEXP, initialSEXP, FSEXP, gSEXP, burnSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
 // sample_variances_horseshoe
 arma::vec sample_variances_horseshoe(const arma::vec x, arma::vec& theta, double& zeta, arma::vec& nu, double& varpi);
 static SEXP _StealLikeBayes_sample_variances_horseshoe_try(SEXP xSEXP, SEXP thetaSEXP, SEXP zetaSEXP, SEXP nuSEXP, SEXP varpiSEXP) {
@@ -688,6 +1053,16 @@ static int _StealLikeBayes_RcppExport_validate(const char* sig) {
         signatures.insert("double(*exp_rej)(const double,const double)");
         signatures.insert("arma::vec(*rtnormcpp)(const arma::vec&,const double,const arma::vec&,const arma::vec&)");
         signatures.insert("arma::mat(*rtmvnorm)(const arma::mat&,const arma::mat&,const arma::mat&,const arma::mat&,const arma::mat&,const arma::mat&,const arma::uword)");
+        signatures.insert("void(*validate_dimensions)(const Eigen::MatrixXd&,const Eigen::VectorXd&,const Eigen::VectorXd&,const Eigen::MatrixXd&,const Eigen::VectorXd&)");
+        signatures.insert("Eigen::MatrixXd(*symmetrise)(const Eigen::MatrixXd&)");
+        signatures.insert("Eigen::MatrixXd(*transform_constraint_matrix)(const Eigen::MatrixXd&,const Eigen::MatrixXd&)");
+        signatures.insert("Eigen::VectorXd(*transform_constraint_offset)(const Eigen::MatrixXd&,const Eigen::VectorXd&,const Eigen::VectorXd&)");
+        signatures.insert("Eigen::VectorXd(*transform_initial_point)(const Eigen::MatrixXd&,const Eigen::VectorXd&,const Eigen::VectorXd&)");
+        signatures.insert("Rcpp::List(*get_next_linear_hit_time)(const Eigen::VectorXd&,const Eigen::VectorXd&,const Eigen::MatrixXd&,const Eigen::VectorXd&,int)");
+        signatures.insert("bool(*verify_constraints)(const Eigen::VectorXd&,const Eigen::MatrixXd&,const Eigen::VectorXd&)");
+        signatures.insert("Eigen::VectorXd(*reflect_velocity)(const Eigen::VectorXd&,const Eigen::VectorXd&)");
+        signatures.insert("Eigen::VectorXd(*sample_next)(const Eigen::VectorXd&,int,const Eigen::MatrixXd&,const Eigen::VectorXd&)");
+        signatures.insert("Eigen::MatrixXd(*rtmvnorm_hmc)(int,const Eigen::VectorXd&,const Eigen::MatrixXd&,const Eigen::VectorXd&,const Eigen::MatrixXd&,const Eigen::VectorXd&,int)");
         signatures.insert("arma::vec(*sample_variances_horseshoe)(const arma::vec,arma::vec&,double&,arma::vec&,double&)");
         signatures.insert("arma::vec(*sample_variances_normal_gamma)(const arma::vec,arma::vec&,double&,double&,const arma::vec,const double,const double,const bool,const double)");
     }
@@ -712,6 +1087,16 @@ RcppExport SEXP _StealLikeBayes_RcppExport_registerCCallable() {
     R_RegisterCCallable("StealLikeBayes", "_StealLikeBayes_exp_rej", (DL_FUNC)_StealLikeBayes_exp_rej_try);
     R_RegisterCCallable("StealLikeBayes", "_StealLikeBayes_rtnormcpp", (DL_FUNC)_StealLikeBayes_rtnormcpp_try);
     R_RegisterCCallable("StealLikeBayes", "_StealLikeBayes_rtmvnorm", (DL_FUNC)_StealLikeBayes_rtmvnorm_try);
+    R_RegisterCCallable("StealLikeBayes", "_StealLikeBayes_validate_dimensions", (DL_FUNC)_StealLikeBayes_validate_dimensions_try);
+    R_RegisterCCallable("StealLikeBayes", "_StealLikeBayes_symmetrise", (DL_FUNC)_StealLikeBayes_symmetrise_try);
+    R_RegisterCCallable("StealLikeBayes", "_StealLikeBayes_transform_constraint_matrix", (DL_FUNC)_StealLikeBayes_transform_constraint_matrix_try);
+    R_RegisterCCallable("StealLikeBayes", "_StealLikeBayes_transform_constraint_offset", (DL_FUNC)_StealLikeBayes_transform_constraint_offset_try);
+    R_RegisterCCallable("StealLikeBayes", "_StealLikeBayes_transform_initial_point", (DL_FUNC)_StealLikeBayes_transform_initial_point_try);
+    R_RegisterCCallable("StealLikeBayes", "_StealLikeBayes_get_next_linear_hit_time", (DL_FUNC)_StealLikeBayes_get_next_linear_hit_time_try);
+    R_RegisterCCallable("StealLikeBayes", "_StealLikeBayes_verify_constraints", (DL_FUNC)_StealLikeBayes_verify_constraints_try);
+    R_RegisterCCallable("StealLikeBayes", "_StealLikeBayes_reflect_velocity", (DL_FUNC)_StealLikeBayes_reflect_velocity_try);
+    R_RegisterCCallable("StealLikeBayes", "_StealLikeBayes_sample_next", (DL_FUNC)_StealLikeBayes_sample_next_try);
+    R_RegisterCCallable("StealLikeBayes", "_StealLikeBayes_rtmvnorm_hmc", (DL_FUNC)_StealLikeBayes_rtmvnorm_hmc_try);
     R_RegisterCCallable("StealLikeBayes", "_StealLikeBayes_sample_variances_horseshoe", (DL_FUNC)_StealLikeBayes_sample_variances_horseshoe_try);
     R_RegisterCCallable("StealLikeBayes", "_StealLikeBayes_sample_variances_normal_gamma", (DL_FUNC)_StealLikeBayes_sample_variances_normal_gamma_try);
     R_RegisterCCallable("StealLikeBayes", "_StealLikeBayes_RcppExport_validate", (DL_FUNC)_StealLikeBayes_RcppExport_validate);
@@ -735,6 +1120,16 @@ static const R_CallMethodDef CallEntries[] = {
     {"_StealLikeBayes_exp_rej", (DL_FUNC) &_StealLikeBayes_exp_rej, 2},
     {"_StealLikeBayes_rtnormcpp", (DL_FUNC) &_StealLikeBayes_rtnormcpp, 4},
     {"_StealLikeBayes_rtmvnorm", (DL_FUNC) &_StealLikeBayes_rtmvnorm, 7},
+    {"_StealLikeBayes_validate_dimensions", (DL_FUNC) &_StealLikeBayes_validate_dimensions, 5},
+    {"_StealLikeBayes_symmetrise", (DL_FUNC) &_StealLikeBayes_symmetrise, 1},
+    {"_StealLikeBayes_transform_constraint_matrix", (DL_FUNC) &_StealLikeBayes_transform_constraint_matrix, 2},
+    {"_StealLikeBayes_transform_constraint_offset", (DL_FUNC) &_StealLikeBayes_transform_constraint_offset, 3},
+    {"_StealLikeBayes_transform_initial_point", (DL_FUNC) &_StealLikeBayes_transform_initial_point, 3},
+    {"_StealLikeBayes_get_next_linear_hit_time", (DL_FUNC) &_StealLikeBayes_get_next_linear_hit_time, 5},
+    {"_StealLikeBayes_verify_constraints", (DL_FUNC) &_StealLikeBayes_verify_constraints, 3},
+    {"_StealLikeBayes_reflect_velocity", (DL_FUNC) &_StealLikeBayes_reflect_velocity, 2},
+    {"_StealLikeBayes_sample_next", (DL_FUNC) &_StealLikeBayes_sample_next, 4},
+    {"_StealLikeBayes_rtmvnorm_hmc", (DL_FUNC) &_StealLikeBayes_rtmvnorm_hmc, 7},
     {"_StealLikeBayes_sample_variances_horseshoe", (DL_FUNC) &_StealLikeBayes_sample_variances_horseshoe, 5},
     {"_StealLikeBayes_sample_variances_normal_gamma", (DL_FUNC) &_StealLikeBayes_sample_variances_normal_gamma, 9},
     {"_StealLikeBayes_RcppExport_registerCCallable", (DL_FUNC) &_StealLikeBayes_RcppExport_registerCCallable, 0},
