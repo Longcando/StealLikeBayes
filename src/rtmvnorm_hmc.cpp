@@ -38,6 +38,9 @@ Eigen::MatrixXd symmetrise(const Eigen::MatrixXd &cov) {
   return 0.5 * (cov + cov.transpose());
 }
 
+
+// [[Rcpp::interfaces(cpp)]]
+// [[Rcpp::export]]
 Eigen::LLT<Eigen::MatrixXd> safe_cholesky(const Eigen::MatrixXd &cov) {
   Eigen::LLT<Eigen::MatrixXd> cov_llt(cov);
   if (cov_llt.info() == Eigen::NumericalIssue) {
@@ -240,10 +243,12 @@ Eigen::VectorXd sample_next(const Eigen::VectorXd &current_sample, int dim,
 
 // [[Rcpp::interfaces(cpp)]]
 // [[Rcpp::export]]
-Eigen::MatrixXd rtmvnorm_hmc(int n, const Eigen::VectorXd &mean,
+Eigen::MatrixXd rtmvnorm_hmc(int n, 
+                             const Eigen::VectorXd &mean,
                              const Eigen::MatrixXd &cov,
                              const Eigen::VectorXd &initial,
-                             const Eigen::MatrixXd &F, const Eigen::VectorXd &g,
+                             const Eigen::MatrixXd &F, 
+                             const Eigen::VectorXd &g,
                              int burn = 10) {
   validate_dimensions(cov, mean, initial, F, g);
   if (burn < 0) {
